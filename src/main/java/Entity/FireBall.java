@@ -18,6 +18,8 @@ public class FireBall extends MapObject {
 	public FireBall(TileMap tileMap, boolean right) {
 		super(tileMap);
 
+		facingRight = right;
+		
 		moveSpeed = 3.8;
 		if (right) {
 			dx = moveSpeed;
@@ -87,15 +89,6 @@ public class FireBall extends MapObject {
 	
 	public void draw(Graphics2D g) {
 		setMapPosition();
-		
-		if (facingRight) {
-			g.drawImage(animation.getImage(), (int) (x + xMap - width / 2), (int) (y + yMap - height / 2), null);
-			g.setColor(Color.RED);
-			g.drawRect((int) (x + xMap - width / 2), (int) (y + yMap - height / 2), animation.getImage().getWidth(), animation.getImage().getHeight());
-		} else {
-			g.drawImage(animation.getImage(), (int) (x + xMap - width / 2 + width), (int) (y + yMap - height / 2), -width, height, null);
-			g.setColor(Color.RED);
-			g.drawRect((int) (x + xMap - width / 2), (int) (y + yMap - height / 2), width, height);
-		}
+		super.draw(g);
 	}
 }

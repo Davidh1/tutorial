@@ -1,5 +1,7 @@
 package Entity;
 
+import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
 import main.GamePanel;
@@ -189,6 +191,20 @@ public abstract class MapObject {
 				y + yMap - height > GamePanel.HEIGHT;
 				
 	}
+	
+	public void draw(Graphics2D g) {
+
+		if (facingRight) {
+			g.drawImage(animation.getImage(), (int) (x + xMap - width / 2), (int) (y + yMap - height / 2), null);
+			g.setColor(Color.RED);
+			g.drawRect((int) (x + xMap - width / 2), (int) (y + yMap - height / 2), animation.getImage().getWidth(), animation.getImage().getHeight());
+		} else {
+			g.drawImage(animation.getImage(), (int) (x + xMap - width / 2 + width), (int) (y + yMap - height / 2), -width, height, null);
+			g.setColor(Color.RED);
+			g.drawRect((int) (x + xMap - width / 2), (int) (y + yMap - height / 2), width, height);
+		}
+	}
+	
 	public void setLeft(boolean b) {
 		left = b;
 	}

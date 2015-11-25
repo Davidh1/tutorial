@@ -48,7 +48,7 @@ public class TileMap {
 		this.tileSize = tileSize;
 		numColsToDraw = GamePanel.WIDTH / tileSize + 2; // extra 2 for padding
 		numRowsToDraw = GamePanel.HEIGHT / tileSize + 2; // extra 2 for padding		
-		tween = 1; // for smooth scrolling
+		tween = 0.7; // for smooth scrolling
 	}
 	
 	public void loadTiles(String resource) {
@@ -178,12 +178,12 @@ public class TileMap {
 		return tileSize;
 	}
 	
-	public int getX() {
-		return (int) x;
+	public double getX() {
+		return x;
 	}
 	
-	public int getY() {
-		return (int) y;
+	public double getY() {
+		return y;
 	}
 	
 	public int getWidth() {

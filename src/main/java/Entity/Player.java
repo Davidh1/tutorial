@@ -253,16 +253,7 @@ public class Player extends MapObject {
 				return;
 			}
 		}
-
-		if (facingRight) {
-			g.drawImage(animation.getImage(), (int) (x + xMap - width / 2), (int) (y + yMap - height / 2), null);
-			g.setColor(Color.RED);
-			g.drawRect((int) (x + xMap - width / 2), (int) (y + yMap - height / 2), animation.getImage().getWidth(), animation.getImage().getHeight());
-		} else {
-			g.drawImage(animation.getImage(), (int) (x + xMap - width / 2 + width), (int) (y + yMap - height / 2), -width, height, null);
-			g.setColor(Color.RED);
-			g.drawRect((int) (x + xMap - width / 2), (int) (y + yMap - height / 2), width, height);
-		}
+		super.draw(g);
 	}
 	
 	private void getNextPosition() {

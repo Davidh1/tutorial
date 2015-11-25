@@ -2,8 +2,12 @@ package gamestate;
 
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
+import Entity.Enemy;
+import Entity.HUD;
 import Entity.Player;
+import Entity.Enemies.Slugger;
 import main.GamePanel;
 import tilemap.Background;
 import tilemap.TileMap;
@@ -13,7 +17,9 @@ public class Level1State extends GameState {
 	private TileMap tileMap;
 	private Background background;
 	private Player player;
-
+	private ArrayList<Enemy> enemies;
+	private HUD hud;
+	
 	public Level1State(GameStateManager gameStateManager) {
 		this.gameStateManager = gameStateManager;
 		init();
@@ -30,11 +36,27 @@ public class Level1State extends GameState {
 
 		player = new Player(tileMap);
 		player.setPosition(100, 100);
+		
+		enemies = new ArrayList<Enemy>();
+		Slugger slugger = new Slugger(tileMap);
+		slugger.setPosition(100, 100);
+		enemies.add(slugger);
+		
+		hud = new HUD(player);
+		
 	}
 
 	public void update() {
 		player.update();
 		tileMap.setPosition(GamePanel.WIDTH / 2 - player.getX(), GamePanel.HEIGHT / 2 - player.getY());
+		
+		// scroll background
+		background.setPosition(tileMap.getX(), tileMap.getY());
+		
+		// update all enemies
+		for(int i = 0; i < enemies.size(); i++) {
+			enemies.get(i).update();
+		}
 	}
 
 	public void draw(Graphics2D g) {
@@ -47,6 +69,14 @@ public class Level1State extends GameState {
 
 		// draw player
 		player.draw(g);
+		
+		// draw enemies
+		for(int i = 0; i < enemies.size(); i++) {
+			enemies.get(i).draw(g);
+		}
+		
+		// draw hud
+		hud.draw(g);
 	}
 
 	public void keyPressed(int k) {
